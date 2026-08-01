@@ -1,0 +1,31 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<h2>{{ recipe.name }}</h2>
+<p><strong>Category:</strong> {{ recipe.category }}</p>
+<p>{{ recipe.description }}</p>
+<p><strong>Total Cost: ৳{{ recipe.total_cost }}</strong></p>
+
+<h4 class="mt-4">Ingredients
+    <a href="{% url 'ingredient_add' recipe.pk %}" class="btn btn-success btn-sm ms-2">+ Add</a>
+</h4>
+<table class="table table-bordered">
+    <thead><tr><th>Name</th><th>Qty</th><th>Unit Price</th><th>Cost</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for ing in ingredients %}
+    <tr>
+        <td>{{ ing.name }}</td>
+        <td>{{ ing.quantity }}</td>
+        <td>৳{{ ing.unit_price }}</td>
+        <td>৳{{ ing.cost }}</td>
+        <td>
+            <a href="{% url 'ingredient_update' ing.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'ingredient_delete' ing.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No ingredients added.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'recipe_list' %}" class="btn btn-secondary">← Back</a>
+{% endblock %}

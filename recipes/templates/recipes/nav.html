@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-success px-3 d-flex justify-content-between">
+    <a class="navbar-brand" href="{% url 'recipe_list' %}">🍽️ Recipe Manager</a>
+    <div>
+        {% if user.is_authenticated %}
+            <span class="text-white me-3">👤 {{ user.username }}</span>
+            <a href="{% url 'recipe_create' %}" class="btn btn-light btn-sm me-2">+ Add Recipe</a>
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                {% csrf_token %}
+                <button class="btn btn-outline-light btn-sm">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-light btn-sm me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-light btn-sm">Register</a>
+        {% endif %}
+    </div>
+</nav>

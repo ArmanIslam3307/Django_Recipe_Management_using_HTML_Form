@@ -1,0 +1,25 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<h2>All Recipes</h2>
+<div class="row">
+{% for recipe in recipes %}
+<div class="col-md-4 mb-3">
+    <div class="card">
+        {% if recipe.recipe_image %}
+        <img src="{{ recipe.recipe_image.url }}" class="card-img-top" style="height:180px;object-fit:cover">
+        {% endif %}
+        <div class="card-body">
+            <h5>{{ recipe.name }}</h5>
+            <p class="text-muted">{{ recipe.category }}</p>
+            <p><strong>Total Cost: ৳{{ recipe.total_cost }}</strong></p>
+            <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-success btn-sm">View</a>
+            <a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+</div>
+{% empty %}
+<p>No recipes yet. <a href="{% url 'recipe_create' %}">Add one!</a></p>
+{% endfor %}
+</div>
+{% endblock %}

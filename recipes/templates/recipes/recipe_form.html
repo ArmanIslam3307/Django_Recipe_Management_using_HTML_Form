@@ -1,0 +1,27 @@
+{% extends 'recipes/base.html' %}
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control"
+               value="{{ recipe.name }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="3">{{ recipe.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label>Category</label>
+        <input type="text" name="category" class="form-control"
+               value="{{ recipe.category }}">
+    </div>
+    <div class="mb-3">
+        <label>Image</label>
+        <input type="file" name="recipe_image" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'recipe_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
